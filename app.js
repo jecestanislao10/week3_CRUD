@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 
 const userRoutes = require('./routes/user')
 const adminRoutes = require('./routes/admin')
@@ -8,10 +9,12 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-const DB_URI = "mongodb+srv://jestanislao:Bloomingglory10@cluster0-yvu13.mongodb.net/newdb";
+const DB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-yvu13.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 
 app.use(bodyParser.json());
+
+app.use(compression());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,5 +40,5 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(DB_URI).then(result => {
     console.log('JEC_LOG: Connected to the Database');
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
 }).catch(err => console.log(err));
