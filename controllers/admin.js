@@ -11,7 +11,7 @@ exports.getUsers = async (req, res, next) => {
         next(error);
         }
     const users = await User.find();
-    res.status(200).json({permissionLevel: req.permissionLevel,message: "sucessfully fetched users", users: users});
+    res.status(200).json({message: "sucessfully fetched users", users: users});
 };
 
 

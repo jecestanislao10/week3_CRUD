@@ -38,6 +38,9 @@ app.use((error, req, res, next) => {
     res.status(status).json({ message: message, data: data });
   });
 
+app.use((req, res, next) => {
+  res.send("<h1><a href = https://explore.postman.com/templates/4631/week3-collection>Postman Collections link</a></h1>");
+})
 mongoose.connect(DB_URI).then(result => {
     console.log('JEC_LOG: Connected to the Database');
     app.listen(process.env.PORT || 3000);
