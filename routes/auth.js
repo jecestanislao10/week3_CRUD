@@ -7,5 +7,7 @@ const isAuth = require('../middleware/is-auth');
 
 router.post('/login', authController.logIn);
 
+router.post('/refresh-token', isAuth, authController.refreshToken);
+
 
 module.exports = router;
