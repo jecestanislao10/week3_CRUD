@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization');
   if (!authHeader) {
@@ -20,6 +21,10 @@ module.exports = (req, res, next) => {
     error.statusCode = 401;
     throw error;
   }
+  
+
+  req.refreshToken = decodedToken.refreshToken;
+
   req.userId = decodedToken.userId;
   req.permissionLevel = decodedToken.permissionLevel;
   next();
