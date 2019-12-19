@@ -31,6 +31,4 @@ router.patch('/users/:userID',
     .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$/, 'i').withMessage('password must be alphanumeric')
 ], isAuth, userController.updateUser);
 
-router.delete('/users/:userID', isAuth, userController.removeUser);
-
 module.exports = router;
