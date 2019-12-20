@@ -177,6 +177,34 @@ module.exports = {
             throw error;
         }
 
+        const errors = [];
+         
+        if(updateData.email){
+
+            if(!validator.isEmail(updateData.email)){
+                errors.push({message: "Invalid email"});
+             }
+        }
+
+            if(updateData.password){
+         // don't really get it but this works the opposite way 
+            if(validator.isAlphanumeric(updateData.password, ['en-US'])){
+                errors.push({message: "password must be alphanumeric"});
+            }
+ 
+            if(validator.isEmpty(updateData.password) || 
+                !validator.isLength(updateData.password, { min:5 })){
+                errors.push({message: "password must be atleast 5 char long"});
+            }
+        }
+
+        if (errors.length > 0) {
+            const error = new Error('Invalid input');
+            error.data = errors;
+            error.code = 422;
+            throw error;
+        }
+
         const user = await User.findById(updateData._id);
 
         if (!user){
