@@ -8,18 +8,21 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
     "express-validator": "^6.3.0",
+    "graphql": "^14.5.8",
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongo-express": "^0.53.0",
     "mongoose": "^5.8.1",
     "nodemon": "^2.0.2",
     "npm": "^6.13.4",
-    "rand-token": "^0.4.0"
+    "rand-token": "^0.4.0",
+    "validator-js": "^0.2.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "NODE_ENV=production MONGO_USER=jestanislao MONGO_PASSWORD=Bloomingglory10 MONGO_DEFAULT_DATABASE=newdb node app.js",
+    "start": "NODE_ENV=production MONGO_USER=jestanislao MONGO_PASSWORD=Bloomingglory10 MONGO_DEFAULT_DATABASE=newdb nodemon app.js",
     "start-dev": "nodemon app.js",
     "start-server": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
