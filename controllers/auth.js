@@ -12,9 +12,15 @@ exports.logIn = async (req, res, next) => {
 
     try {
 
-    if (!email || !password){
-        const error = new Error('missing email / password');
+    if (!email){
+        const error = new Error('no email provided');
         error.statusCode = 404;
+        throw error;
+    }
+
+    if (!password){
+        const error = new Error('no password provided');
+        error.statusCode = 422;
         throw error;
     }
 
