@@ -6,10 +6,17 @@ const jwt = require('jsonwebtoken');
 const tokenlist = {};
 
 exports.logIn = async (req, res, next) => {
+
     const email = req.body.email;
     const password = req.body.password;
 
     try {
+
+    if (!email || !password){
+        const error = new Error('missing email / password');
+        error.statusCode = 404;
+        throw error;
+    }
 
     const user = await User.findOne({email: email});
 

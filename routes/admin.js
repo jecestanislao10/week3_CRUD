@@ -9,5 +9,7 @@ const router = express.Router();
 
 router.get('/users',isAuth, adminController.getUsers);
 
+router.delete('/users/:userID',isAuth, adminController.removeUser);
+
 
 module.exports = router;
