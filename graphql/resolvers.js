@@ -113,11 +113,26 @@ module.exports = {
     })
     },
     createUser: async function ({inputData}, req) {
+
+        if(req.isAuth === true && req.permissionLevel === "0")
+        {
+            const error = new Error('Operation not allowed');
+            error.code = 401;
+            throw error;
+        }
+
+
         const email = inputData.email;
         const password = inputData.password;
         const fname = inputData.fname;
         const lname = inputData.lname;
-        const permissionLevel = inputData.permissionLevel;
+
+        let permissionLevel = "0";
+
+        if(req.permissionLevel === "1")
+        {
+            permissionLevel = inputData.permissionLevel;
+        }
 
         const errors = [];
 
@@ -207,6 +222,10 @@ module.exports = {
 
         const user = await User.findById(updateData._id);
 
+        if (updateData.password){
+            updateData.password = await bcrypt.hash(updateData.password, 12);
+        }
+
         if (!user){
             const error = new Error('no user found');
             error.code = 401;
@@ -252,6 +271,12 @@ module.exports = {
             throw error;
         }
         
+        if (validator.isEmpty(userId)){
+            const error = new Error('no user id provided');
+            error.code = 401;
+            throw error;
+        }
+
         const user = await User.findById(userId);
 
         if (!user){

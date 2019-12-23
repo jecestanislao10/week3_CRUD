@@ -7,7 +7,7 @@ module.exports = buildSchema (`
         password: String!
         fname: String!
         lname: String!
-        permissionLevel: String!
+        permissionLevel: String
     }
 
     input updateData{
@@ -26,7 +26,7 @@ module.exports = buildSchema (`
         password: String!
         fname: String!
         lname: String!
-        permissionLevel: String!
+        permissionLevel: String
     }
 
     type Users {
