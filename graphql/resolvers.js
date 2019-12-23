@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const ObjectId = require('mongodb').ObjectID;
 
 const User = require('../models/user');
 
@@ -95,13 +96,22 @@ module.exports = {
     },
     getUser: async function({userId}, req){
 
+        const id = new ObjectId(userId);
+
         if(req.isAuth === false){
             const error = new Error('not Authenticated');
             error.code = 401;
             throw error;
         }
 
-        const user = await User.findById(userId);
+        const user = await User.findById(id);
+
+        if(!user){
+            const error = new Error('no user fetched');
+            error.code = 404;
+            throw error;  
+        }
+
         return ({
         message: "Sucessfully fetched user",
         _id: user._id.toString(),
@@ -127,6 +137,8 @@ module.exports = {
         const fname = inputData.fname;
         const lname = inputData.lname;
 
+        password = bcrypt.hash(password, 12);
+
         let permissionLevel = "0";
 
         if(req.permissionLevel === "1")
@@ -139,9 +151,11 @@ module.exports = {
         if(!validator.isEmail(email)){
            errors.push({message: "Invalid email"});
         }
-
+        
         // don't really get it but this works the opposite way 
         if(validator.isAlphanumeric(password, ['en-US'])){
+            // STRING - J E R I C O
+            // ALHPANUMERIC J 3 R 1 C 0 $
             errors.push({message: "password must be alphanumeric"});
         }
 
@@ -202,7 +216,6 @@ module.exports = {
         }
 
             if(updateData.password){
-         // don't really get it but this works the opposite way 
             if(validator.isAlphanumeric(updateData.password, ['en-US'])){
                 errors.push({message: "password must be alphanumeric"});
             }
@@ -327,7 +340,6 @@ module.exports = {
           );
     
         return {message: "token refreshed", accessToken: token, refreshToken: refreshToken, _id: user._id};
-
 
     }
 }
