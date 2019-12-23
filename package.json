@@ -22,7 +22,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "NODE_ENV=production MONGO_USER=jestanislao MONGO_PASSWORD=Bloomingglory10 MONGO_DEFAULT_DATABASE=newdb nodemon app.js",
+    "start": "NODE_ENV=production MONGO_USER=jestanislao MONGO_PASSWORD=Bloomingglory10 MONGO_DEFAULT_DATABASE=newdb node app.js",
     "start-dev": "nodemon app.js",
     "start-server": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
