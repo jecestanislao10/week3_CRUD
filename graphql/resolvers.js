@@ -133,11 +133,11 @@ module.exports = {
 
 
         const email = inputData.email;
-        const password = inputData.password;
+        let password = inputData.password;
         const fname = inputData.fname;
         const lname = inputData.lname;
 
-        password = bcrypt.hash(password, 12);
+        password =  await bcrypt.hash(password, 12);
 
         let permissionLevel = "0";
 
