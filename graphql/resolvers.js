@@ -104,6 +104,12 @@ module.exports = {
             throw error;
         }
 
+        if(req.permissionLevel !== "1"){
+            const error = new Error('Operation not allowed');
+            error.code = 401;
+            throw error;
+        }
+
         const user = await User.findById(id);
 
         if(!user){
@@ -204,6 +210,18 @@ module.exports = {
             error.code = 401;
             throw error;
         }
+        if(req.permissionLevel !== "1"){
+            if(req.userId !== updateData._id){
+            const error = new Error('Operation not allowed');
+            error.code = 401;
+            throw error;
+            }
+            if (updateData.permissionLevel){
+            const error = new Error('Not allowed to change permission Level');
+            error.code = 401;
+            throw error;
+            }
+        }
 
         const errors = [];
          
@@ -279,6 +297,12 @@ module.exports = {
 
         if(req.isAuth === false){
             const error = new Error('not Authenticated');
+            error.code = 401;
+            throw error;
+        }
+
+        if(req.permissionLevel !== "1"){
+            const error = new Error('Operation not allowed');
             error.code = 401;
             throw error;
         }
