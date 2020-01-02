@@ -137,8 +137,6 @@ module.exports = {
         const fname = inputData.fname;
         const lname = inputData.lname;
 
-        password =  await bcrypt.hash(password, 12);
-
         let permissionLevel = "0";
 
         if(req.permissionLevel === "1")
@@ -152,7 +150,6 @@ module.exports = {
            errors.push({message: "Invalid email"});
         }
         
-        // don't really get it but this works the opposite way 
         if(validator.isAlphanumeric(password, ['en-US'])){
             // STRING - J E R I C O
             // ALHPANUMERIC J 3 R 1 C 0 $
@@ -178,6 +175,8 @@ module.exports = {
             error.code = 409;
             throw error;
         }
+
+        password =  await bcrypt.hash(password, 12);
 
         const user = new User ({
             email: email,
