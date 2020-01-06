@@ -1,7 +1,0 @@
-{
-    "env": {
-        "MONGO_USER": "jestanislao",
-        "MONGO_PASSWORD": "Bloomingglory10",
-        "MONGO_DEFAULT_DATABASE": "newdb"
-    }
-}

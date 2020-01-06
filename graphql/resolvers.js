@@ -43,7 +43,7 @@ module.exports = {
 
         const refreshToken = jwt.sign(
             {},
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1d' }
           );
     
@@ -56,7 +56,7 @@ module.exports = {
     
         const token = jwt.sign(
             credentials,
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1h' }
           );
     
@@ -342,7 +342,7 @@ module.exports = {
         }
 
         if (refreshToken !== req.refreshToken){
-            const error = new Error('operation not allowed');
+            const error = new Error('invalid refresh token');
             error.code = 401;
             throw error;
         }
@@ -358,7 +358,7 @@ module.exports = {
     
         const token = jwt.sign(
             credentials,
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1h' }
           );
     

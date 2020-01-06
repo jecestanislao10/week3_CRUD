@@ -92,7 +92,7 @@ exports.getUser = async (req, res, next) => {
                 fetchedUser.lname = user.lname;
             }
 
-            res.status(201).json({message: 'User fetched', 
+            res.status(200).json({message: 'User fetched', 
             user: fetchedUser});
 
         } catch(err) {
