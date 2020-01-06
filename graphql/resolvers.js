@@ -342,7 +342,7 @@ module.exports = {
         }
 
         if (refreshToken !== req.refreshToken){
-            const error = new Error('operation not allowed');
+            const error = new Error('invalid refresh token');
             error.code = 401;
             throw error;
         }
