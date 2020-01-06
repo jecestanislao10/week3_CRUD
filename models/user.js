@@ -21,7 +21,7 @@ const userSchema = new Schema ({
     permissionLevel: {
         type: String,
         required: true,
-        enum: ['1', '0']
+        enum: ["1", "0"]
     }
 });
 
