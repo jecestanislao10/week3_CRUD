@@ -43,7 +43,7 @@ module.exports = {
 
         const refreshToken = jwt.sign(
             {},
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1d' }
           );
     
@@ -56,7 +56,7 @@ module.exports = {
     
         const token = jwt.sign(
             credentials,
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1h' }
           );
     
@@ -358,7 +358,7 @@ module.exports = {
     
         const token = jwt.sign(
             credentials,
-            'supersecretkeynijerico',
+            process.env.SECRET_KEY,
             { expiresIn: '1h' }
           );
     

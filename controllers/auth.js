@@ -43,7 +43,7 @@ exports.logIn = async (req, res, next) => {
     
     const refreshToken = jwt.sign(
         {},
-        'supersecretkeynijerico',
+        process.env.SECRET_KEY,
         { expiresIn: '1d' }
       );
 
@@ -56,7 +56,7 @@ exports.logIn = async (req, res, next) => {
 
       const token = jwt.sign(
         credentials,
-        'supersecretkeynijerico',
+        process.env.SECRET_KEY,
         { expiresIn: '1h' }
       );
 
@@ -106,7 +106,7 @@ exports.refreshToken = async (req, res, next) => {
         
               const token = jwt.sign(
                 credentials,
-                'supersecretkeynijerico',
+                process.env.SECRET_KEY,
                 { expiresIn: '1h' }
               );
 
